@@ -1,20 +1,19 @@
 import React from "react";
 
-const TestimonialsCard = () => {
+const TestimonialsCard = ({rating, image, name, comment}) => { // destructuring the testimonial prop
   return (
     <div className="testimonial-card">
       <div className="rating">
         <h3>Rating:</h3>
-        <p>5/5</p>
+        <p>{rating}</p>
       </div>
       <div className="testimonial-info">
         <div className="image-name">
-          <img src="https://via.placeholder.com/50" alt="Logo" />
-          <p>Name</p>
+          <img src={image} alt={name} />
+          <p>{name}</p>
         </div>
         <div className="testimonial-text">
-          <p>Little Lemon is a great restaurant!</p>
-          <p>I love their food and their service!</p>
+          <p>{comment}</p>
         </div>
       </div>
     </div>

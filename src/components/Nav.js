@@ -2,6 +2,8 @@ import React from "react";
 import burger from "../assets/Burger.svg";
 import basket from "../assets/Basket.svg";
 import logo from "../assets/Logo.svg";
+import { Link } from "react-router-dom";
+
 
 const Nav = () => {
   return (
@@ -13,22 +15,22 @@ const Nav = () => {
       </div>
         <ul>
           <li>
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="/">About</a>
+            <Link to="/">About</Link>
           </li>
           <li>
-            <a href="/">Menu</a>
+            <Link to="/">Menu</Link>
           </li>
           <li>
-            <a href="/">Reservations</a>
+            <Link to="/">Reservations</Link>
           </li>
           <li>
-            <a href="/">Order online</a>
+            <Link to="/">Order online</Link>
           </li>
           <li>
-            <a href="/">Login</a>
+            <Link to="/">Login</Link>
           </li>
         </ul>
         <div className="icons basket"><img src={basket} alt="cart" /></div>
