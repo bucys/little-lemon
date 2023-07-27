@@ -2,7 +2,7 @@ import React from "react";
 
 const TestimonialsCard = ({rating, image, name, comment}) => { // destructuring the testimonial prop
   return (
-    <div className="testimonial-card">
+    <div className="testimonial-card" role="contentinfo" aria-label="testimonial card">
       <div className="rating">
         <h3>Rating:</h3>
         <p>{rating}</p>

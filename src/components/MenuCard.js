@@ -2,7 +2,7 @@ import React from "react";
 
 const MenuCard = ({name, image, price, description}) => { 
   return (
-    <div className="menu-card">
+    <div className="menu-card" role="contentinfo" aria-label="menu card">
       <div className="menu-card-image">
         <img src={image} alt={name} height={442} width={404} />
       </div>
@@ -13,7 +13,7 @@ const MenuCard = ({name, image, price, description}) => {
       <div className="menu-card-description">
         <p>{description}</p>
       </div>
-      <a href="/">Order Online</a>
+      <a href="/" aria-label={`Order ${name} online`}>Order Online</a>
     </div>
   );
 };

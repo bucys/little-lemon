@@ -415,6 +415,16 @@ select#occasion option:checked {
   color: #495E57;
 }
 
+.error {
+  color: #FF3860;
+  font-size: 0.8em;
+  margin-top: 5px;
+  padding: 5px;
+  border: 1px solid #FF3860;
+  border-radius: 5px;
+  background-color: #FFCDD2;
+}
+
 
   
 

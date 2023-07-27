@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 const Nav = () => {
   return (
     <>
-      <nav>
-      <div className="icons burger"><img src={burger} alt="burger menu" /></div>
-      <div className='logo'>
+      <nav aria-label="Main navigation">
+      <div className="icons burger" aria-hidden="true"><img src={burger} alt="burger menu" /></div>
+      <div className='logo' aria-hidden="true">
       <img src={logo} alt="Logo" />
       </div>
         <ul>
@@ -33,7 +33,7 @@ const Nav = () => {
             <Link to="/">Login</Link>
           </li>
         </ul>
-        <div className="icons basket"><img src={basket} alt="cart" /></div>
+        <div className="icons basket" aria-hidden="true"><img src={basket} alt="cart" /></div>
       </nav>
     </>
   );
