@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Main from './Main';
 import Specials from './Specials';
 import CustomerSay from './CustomerSay';
@@ -60,14 +60,15 @@ const HomePage = () => {
             image: 'https://via.placeholder.com/50',
           }
       ];
-  return (
-    <>
-      <Main />
-      <Specials menuItems={menuItems} />
-      <CustomerSay testimonials={testimonials} />
-      <Chicago />
-    </>
-  )
+
+    return (
+        <>
+            <Main />
+            <Specials menuItems={menuItems} />
+            <CustomerSay testimonials={testimonials} />
+            <Chicago />
+        </>
+    )
 }
 
 export default HomePage;

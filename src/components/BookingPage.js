@@ -1,47 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import BookingForm from './BookingForm';
+import { fetchAPI } from '../api/api';
+
+export async function updateTimes(state, action) {
+  switch(action.type) {
+    case 'init':
+        return action.payload;
+    case 'update':
+        try {
+            const times = await window.fetchAPI(action.payload);
+            return times;
+        } catch (error) {
+            console.error("Failed to update times: ", error);
+            return state;  
+        }
+    default:
+        return state;
+  }
+}
+
+
+export async function initializeTimes() {
+  
+  const date = new Date();
+  const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+
+  try {
+      const times = await window.fetchAPI(dateString);
+      return times;
+  } catch (error) {
+      console.error("Failed to initialize times: ", error);
+      
+      return ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+  }
+}
+
 
 const BookingPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    date: '',
-    time: '',
-    guests: ''
-  });
+  const [date, setDate] = useState(new Date()); 
+  const [availableTimes, setAvailableTimes] = useState([]);
+  const [bookings, setBookings] = useState([]);
 
-  const handleInputChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
+  useEffect(() => {
+    const fetchTimes = async () => {
+      const times = await fetchAPI(date);
+      const unbookedTimes = times.filter(time => !bookings.includes(`${date} ${time}`));
+      setAvailableTimes(unbookedTimes);
+    };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Here you would typically send the form data to your server
-    console.log(formData);
-  };
+    fetchTimes();
+  }, [date, bookings]);
 
   return (
-    <div>
-      <h1>Book a Table</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input type="text" name="name" onChange={handleInputChange} value={formData.name} />
-        </label>
-        <label>
-          Date:
-          <input type="date" name="date" onChange={handleInputChange} value={formData.date} />
-        </label>
-        <label>
-          Time:
-          <input type="time" name="time" onChange={handleInputChange} value={formData.time} />
-        </label>
-        <label>
-          Number of Guests:
-          <input type="number" name="guests" onChange={handleInputChange} value={formData.guests} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
+    <BookingForm availableTimes={availableTimes} onDateChange={setDate} setBookings={setBookings}/>
   );
 };
+
+
 
 export default BookingPage;

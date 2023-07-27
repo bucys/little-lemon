@@ -338,7 +338,63 @@ footer .footer-list li a {
     text-decoration: none;
     display: block;
 }
-  
+ 
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.booking-form {
+  display: grid;
+  gap: 20px;
+  width: 300px;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  border-radius: 10px;
+}
+
+.booking-form label {
+  font-size: 0.9em;
+  color: #333;
+  font-weight: 600;
+}
+
+.booking-form input, .booking-form select {
+  height: 40px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.booking-form input[type="submit"] {
+  background-color: #495E57;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.booking-form input[type="submit"]:hover {
+  background-color: #39484a;
+}
+
+select#occasion {
+  background-position: left, right;
+  background-repeat: no-repeat, no-repeat;
+  padding-left: 30px;
+}
+
+select#occasion option:checked {
+  background-color: #495E57;
+  color: white;
+}
+
+
   
 
 /* Media */
