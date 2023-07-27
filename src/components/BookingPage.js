@@ -1,42 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import BookingForm from './BookingForm';
-import { fetchAPI } from '../api/api';
+import { fetchAPI, submitAPI } from '../api/api';
+import { useNavigate } from 'react-router-dom';
 
-export async function updateTimes(state, action) {
+export function updateTimes(state, action) {
   switch(action.type) {
     case 'init':
         return action.payload;
     case 'update':
-        try {
-            const times = await window.fetchAPI(action.payload);
-            return times;
-        } catch (error) {
-            console.error("Failed to update times: ", error);
-            return state;  
-        }
+        return action.payload;
     default:
         return state;
   }
 }
 
-
 export async function initializeTimes() {
-  
   const date = new Date();
-  const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 
   try {
-      const times = await window.fetchAPI(dateString);
-      return times;
+    const times = await fetchAPI(dateString);
+    return times;
   } catch (error) {
-      console.error("Failed to initialize times: ", error);
-      
-      return ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+    console.error("Failed to initialize times: ", error);
+    return ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
   }
 }
 
 
 const BookingPage = () => {
+  const navigate = useNavigate();
   const [date, setDate] = useState(new Date()); 
   const [availableTimes, setAvailableTimes] = useState([]);
   const [bookings, setBookings] = useState([]);
@@ -51,11 +44,15 @@ const BookingPage = () => {
     fetchTimes();
   }, [date, bookings]);
 
+  const submitForm = (formData) => {
+      if (submitAPI(formData)) {
+          navigate('/confirmed');
+      }
+  }
+
   return (
-    <BookingForm availableTimes={availableTimes} onDateChange={setDate} setBookings={setBookings}/>
+    <BookingForm availableTimes={availableTimes} onDateChange={setDate} setBookings={setBookings} onSubmit={submitForm}/>
   );
 };
-
-
 
 export default BookingPage;

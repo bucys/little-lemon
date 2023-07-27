@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { submitAPI } from '../api/api';
 
-const BookingForm = ({ availableTimes, onDateChange, setBookings }) => {
+const BookingForm = ({ availableTimes, onDateChange, setBookings, onSubmit }) => {
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState('');
   const [guests, setGuests] = useState(1);
@@ -16,6 +16,7 @@ const BookingForm = ({ availableTimes, onDateChange, setBookings }) => {
 
 const handleSubmit = (event) => {
   event.preventDefault();
+  onSubmit({ date, time, guests, occasion });
 
   const formData = {
     date,
